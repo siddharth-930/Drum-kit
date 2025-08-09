@@ -1,0 +1,12 @@
+# .github/workflows/trigger-gitlab-mirror.yml
+name: Trigger GitLab mirror pull
+on: [push]
+jobs:
+  call-gitlab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger mirror pull
+        run: |
+          curl -sS -X POST \
+            -H "PRIVATE-TOKEN: ${{ secrets.GITLAB_API_TOKEN }}" \
+            "https://gitlab.com/api/v4/projects/72682096/mirror/pull"
